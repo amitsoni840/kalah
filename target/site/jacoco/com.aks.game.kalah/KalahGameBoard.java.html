@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>KalahGameBoard.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KalahGame</a> &gt; <a href="index.source.html" class="el_package">com.aks.game.kalah</a> &gt; <span class="el_source">KalahGameBoard.java</span></div><h1>KalahGameBoard.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.aks.game.kalah;
+
+import java.util.Arrays;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+
+/**
+ * @author Amit Soni
+ *
+ */
+@ApiModel(value = &quot;KalahGameBoard&quot;, description = &quot;This contains properties of Kalah Game Board. i.e number of pits or stones in a pit.&quot;)
+public class KalahGameBoard {
+
+	@ApiModelProperty(value = &quot;eachPlayerPits&quot;, name = &quot;Number of Pits for each player.&quot;)
+	private int eachPlayerPits;
+
+	@ApiModelProperty(value = &quot;noOfStonesInEachPit&quot;, name = &quot;Number of stones in each pit.&quot;)
+	private int noOfStonesInEachPit;
+
+	@ApiModelProperty(value = &quot;pits&quot;, name = &quot;Array of pits including each player's kalah.&quot;)
+	private Pit[] pits;
+
+	/**
+	 * Empty Constructor.
+	 */
+<span class="nc" id="L31">	public KalahGameBoard() {</span>
+		// default constructor.
+<span class="nc" id="L33">	}</span>
+
+	/**
+	 * Constructor to create KalahBoard from eachPlayerPits and
+	 * noOfStonesInEachPit properties.
+	 * 
+	 * @param eachPlayerPits
+	 * @param noOfStonesInEachPit
+	 */
+<span class="fc" id="L42">	public KalahGameBoard(int eachPlayerPits, int noOfStonesInEachPit) {</span>
+<span class="fc" id="L43">		this.eachPlayerPits = eachPlayerPits;</span>
+<span class="fc" id="L44">		this.noOfStonesInEachPit = noOfStonesInEachPit;</span>
+<span class="fc" id="L45">	}</span>
+
+	/**
+	 * @return the eachPlayerPits
+	 */
+	public int getEachPlayerPits() {
+<span class="fc" id="L51">		return eachPlayerPits;</span>
+	}
+
+	/**
+	 * @return the noOfStonesInEachPit
+	 */
+	public int getNoOfStonesInEachPit() {
+<span class="nc" id="L58">		return noOfStonesInEachPit;</span>
+	}
+
+	/**
+	 * @return the pits
+	 */
+	public Pit[] getPits() {
+<span class="fc" id="L65">		return pits;</span>
+	}
+
+	/**
+	 * Method to initialize a KalahGameBoard.
+	 */
+	public void initialize() {
+<span class="fc" id="L72">		pits = new Pit[(eachPlayerPits * 2) + 2];</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">		for (int i = 0; i &lt; pits.length; i++) {</span>
+<span class="fc" id="L74">			Pit pit = new Pit(0);</span>
+<span class="fc" id="L75">			pits[i] = pit;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">			if (!isKalah(i)) {</span>
+<span class="fc" id="L77">				pits[i].setStones(noOfStonesInEachPit);</span>
+			}
+		}
+<span class="fc" id="L80">	}</span>
+
+	/**
+	 * This function checks pitNumber is a player's Kalah or not.
+	 * 
+	 * @param pitNumber
+	 *            - Integer pit number
+	 * @return boolean - True or False , True if pit is a Kalah and False if
+	 *         not.
+	 */
+	public boolean isKalah(int pitNumber) {
+<span class="fc bfc" id="L91" title="All 4 branches covered.">		if (pitNumber == eachPlayerPits || pitNumber == eachPlayerPits * 2 + 1) {</span>
+<span class="fc" id="L92">			return true;</span>
+		}
+<span class="fc" id="L94">		return false;</span>
+	}
+
+	/**
+	 * This function returns array index of a player's kalah.
+	 * 
+	 * @param player
+	 *            - {@link Player}
+	 * @return int - array index of kalah in array of pits.
+	 */
+	public int getKalah(Player player) {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">		if (player.getPlayerNumber() == 0) {</span>
+<span class="fc" id="L106">			return eachPlayerPits;</span>
+		} else {
+<span class="fc" id="L108">			return eachPlayerPits * 2 + 1;</span>
+		}
+	}
+
+	/**
+	 * This method checks whether the pitNumber belongs to this player or not.
+	 * 
+	 * @param player
+	 *            - {@link Player}
+	 * @param pitNumber
+	 *            - int , index of pit array.
+	 * @return
+	 */
+	public boolean isMyPit(Player player, int pitNumber) {
+<span class="fc bfc" id="L122" title="All 2 branches covered.">		if (Math.abs(pitNumber / (eachPlayerPits + 1)) == player.getPlayerNumber()) {</span>
+<span class="fc" id="L123">			return true;</span>
+		}
+<span class="fc" id="L125">		return false;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+<span class="nc" id="L135">		return &quot;KalahGameBoard [eachPlayerPits=&quot; + eachPlayerPits + &quot;, pits=&quot; + Arrays.toString(pits) + &quot;]&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

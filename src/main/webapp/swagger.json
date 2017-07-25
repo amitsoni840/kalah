@@ -1,0 +1,13 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a document for Kalah Game API",
+    "version" : "v1",
+    "title" : "Kalah Game API Documentation",
+    "contact" : {
+      "email" : "amitsoni840@gmail.com"
+    }
+  },
+  "basePath" : "/kalah",
+  "schemes" : [ "http" ]
+}

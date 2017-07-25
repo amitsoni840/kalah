@@ -1,0 +1,10 @@
+com\backbase\game\kalah\rules\test\KalahStonesCaptureRuleTest.class
+com\backbase\game\kalah\rules\test\KalahSetCurrentPlayerRuleTest.class
+com\backbase\game\kalah\test\PitTest.class
+com\backbase\game\kalah\rules\test\KalahValidMoveRuleTest.class
+com\backbase\game\kalah\rules\test\KalahDetermineWinnerRuleTest.class
+com\backbase\game\kalah\test\KalahGameBoardTest.class
+com\backbase\game\kalah\rules\test\KalahMoveRuleTest.class
+com\backbase\game\kalah\test\KalahApplicationTest.class
+com\backbase\game\kalah\test\KalahGameTest.class
+com\backbase\game\kalah\rules\test\KalahGameEndRuleTest.class

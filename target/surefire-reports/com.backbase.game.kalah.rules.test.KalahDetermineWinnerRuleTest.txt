@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.backbase.game.kalah.rules.test.KalahDetermineWinnerRuleTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.868 sec - in com.backbase.game.kalah.rules.test.KalahDetermineWinnerRuleTest

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>KalahGame.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KalahGame</a> &gt; <a href="index.source.html" class="el_package">com.aks.game.kalah</a> &gt; <span class="el_source">KalahGame.java</span></div><h1>KalahGame.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.aks.game.kalah;
+
+import org.springframework.stereotype.Component;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+
+/**
+ * @author Amit Soni
+ *
+ */
+@Component
+@ApiModel(value = &quot;KalahGame&quot;, description = &quot;Kalah Game details.&quot;)
+<span class="fc" id="L18">public class KalahGame {</span>
+
+	/**
+	 * Kalah Game Board containing pits and stones.
+	 */
+	@ApiModelProperty(name = &quot;KalahGameBoard&quot;, value = &quot;Kalah Game Board details.&quot;)
+	private KalahGameBoard gameBoard;
+	/**
+	 * First Player details.
+	 */
+	@ApiModelProperty(name = &quot;Player1&quot;, value = &quot;First Player's information.&quot;)
+	private Player player1;
+	/**
+	 * Second player details.
+	 */
+	@ApiModelProperty(name = &quot;Player2&quot;, value = &quot;Secong Player's information.&quot;)
+	private Player player2;
+	/**
+	 * Player refering to current turn.
+	 */
+	@ApiModelProperty(name = &quot;currentPlayer&quot;, value = &quot;Current Player's reference.&quot;)
+	private Player currentPlayer;
+	/**
+	 * Location of the last stone dropped for current player's turn.
+	 */
+	@ApiModelProperty(name = &quot;lastStoneDropLocation&quot;, value = &quot;last stone drop location to decide another turn or capture the balls from other's kalah..&quot;)
+	private int lastStoneDropLocation;
+	/**
+	 * Game State. Possible values are FINISHED,INPROGRESS and DRAW.
+	 */
+	@ApiModelProperty(name = &quot;gameState&quot;, value = &quot;Game status whether in progress or finished.&quot;)
+	private GameState gameState;
+
+	private Player winner;
+
+	/**
+	 * @return the winner
+	 */
+	public Player getWinner() {
+<span class="fc" id="L57">		return winner;</span>
+	}
+
+	/**
+	 * @param winner
+	 *            the winner to set
+	 */
+	public void setWinner(Player winner) {
+<span class="fc" id="L65">		this.winner = winner;</span>
+<span class="fc" id="L66">	}</span>
+
+	/**
+	 * @return the gameState
+	 */
+	public GameState getGameState() {
+<span class="fc" id="L72">		return gameState;</span>
+	}
+
+	/**
+	 * @param gameState
+	 *            the gameState to set
+	 */
+	public void setGameState(GameState gameState) {
+<span class="fc" id="L80">		this.gameState = gameState;</span>
+<span class="fc" id="L81">	}</span>
+
+	/**
+	 * @return the lastStoneDropLocation
+	 */
+	public int getLastStoneDropLocation() {
+<span class="fc" id="L87">		return lastStoneDropLocation;</span>
+	}
+
+	/**
+	 * @param lastStoneDropLocation
+	 *            the lastStoneDropLocation to set
+	 */
+	public void setLastStoneDropLocation(int lastStoneDropLocation) {
+<span class="fc" id="L95">		this.lastStoneDropLocation = lastStoneDropLocation;</span>
+<span class="fc" id="L96">	}</span>
+
+	/**
+	 * @return the gameBoard
+	 */
+	public KalahGameBoard getGameBoard() {
+<span class="fc" id="L102">		return gameBoard;</span>
+	}
+
+	/**
+	 * @param gameBoard
+	 *            the gameBoard to set
+	 */
+	public void setGameBoard(KalahGameBoard gameBoard) {
+<span class="fc" id="L110">		this.gameBoard = gameBoard;</span>
+<span class="fc" id="L111">	}</span>
+
+	/**
+	 * @return the player1
+	 */
+	public Player getPlayer1() {
+<span class="fc" id="L117">		return player1;</span>
+	}
+
+	/**
+	 * @param player1
+	 *            the player1 to set
+	 */
+	public void setPlayer1(Player player1) {
+<span class="fc" id="L125">		this.player1 = player1;</span>
+<span class="fc" id="L126">	}</span>
+
+	/**
+	 * @return the player2
+	 */
+	public Player getPlayer2() {
+<span class="fc" id="L132">		return player2;</span>
+	}
+
+	/**
+	 * @param player2
+	 *            the player2 to set
+	 */
+	public void setPlayer2(Player player2) {
+<span class="fc" id="L140">		this.player2 = player2;</span>
+<span class="fc" id="L141">	}</span>
+
+	/**
+	 * @return the currentPlayer
+	 */
+	public Player getCurrentPlayer() {
+<span class="fc" id="L147">		return currentPlayer;</span>
+	}
+
+	/**
+	 * @param currentPlayer
+	 *            the currentPlayer to set
+	 */
+	public void setCurrentPlayer(Player currentPlayer) {
+<span class="fc" id="L155">		this.currentPlayer = currentPlayer;</span>
+<span class="fc" id="L156">	}</span>
+
+	public Player getOtherPlayer(Player player) {
+<span class="fc bfc" id="L159" title="All 2 branches covered.">		if (player.getPlayerNumber() == 0) {</span>
+<span class="fc" id="L160">			return player2;</span>
+		} else {
+<span class="fc" id="L162">			return player1;</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

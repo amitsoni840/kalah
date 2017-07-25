@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>KalahRestController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KalahGame</a> &gt; <a href="index.source.html" class="el_package">com.aks.game.kalah.controller</a> &gt; <span class="el_source">KalahRestController.java</span></div><h1>KalahRestController.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.aks.game.kalah.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.aks.game.kalah.InvalidMoveException;
+import com.aks.game.kalah.KalahGame;
+import com.aks.game.kalah.service.KalahGameService;
+import com.aks.game.request.StartGameRequest;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+/**
+ * This class contains Rest API's to play the Kalah Game
+ * 
+ * @author Amit Soni
+ *
+ */
+@Api(value = &quot;/kalah&quot;, description = &quot;This Api allows to start and play a Kalah game.&quot;)
+@RestController
+@RequestMapping(&quot;/kalah&quot;)
+<span class="fc" id="L32">public class KalahRestController {</span>
+
+	@Autowired
+	KalahGameService gameService;
+
+	/**
+	 * API to start &amp; initialize the game.
+	 * 
+	 * @param startGameRequest
+	 *            - {@link StartGameRequest}
+	 * @return {@link KalahGame} - Returns the response containing updated Game
+	 *         board as per current action.
+	 */
+	@ApiOperation(value = &quot;/start&quot;, notes = &quot;This api is used to start the game.&quot;, response = KalahGame.class)
+	@RequestMapping(value = &quot;/start&quot;, method = RequestMethod.POST)
+	public ResponseEntity&lt;KalahGame&gt; startGame(@RequestBody StartGameRequest startGameRequest) {
+<span class="nc" id="L48">		return ResponseEntity.status(HttpStatus.OK).body(gameService.startGame(startGameRequest));</span>
+	}
+
+	/**
+	 * This API will make a move onto the the current Kalah game board as per
+	 * the pit chosed by the current player.
+	 * 
+	 * @param kalahGame
+	 *            - {@link KalahGame}
+	 * @param pitIdToMove
+	 *            - Int Pit ID chosen to make a move.
+	 * @return {@link KalahGame} - Returns the response containing updated Game
+	 *         board as per current action.
+	 */
+	@ApiOperation(value = &quot;/move/{pitIdToMove}&quot;, notes = &quot;This api is used to make a move in the game.&quot;, response = KalahGame.class)
+	@RequestMapping(value = &quot;/move/{pitIdToMove}&quot;, method = RequestMethod.POST)
+	public ResponseEntity&lt;KalahGame&gt; makeMove(@RequestBody KalahGame kalahGame, @PathVariable int pitIdToMove) {
+		try {
+<span class="nc" id="L66">			return ResponseEntity.status(HttpStatus.OK).body(gameService.makeMove(kalahGame, pitIdToMove));</span>
+<span class="nc" id="L67">		} catch (InvalidMoveException ime) {</span>
+<span class="nc" id="L68">			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(kalahGame);</span>
+		}
+	}
+
+	/**
+	 * This API is used to reset a game if a user wants to leave the game and
+	 * start a new.
+	 * 
+	 * @param kalahGame
+	 *            - {@link KalahGame}
+	 * @return {@link KalahGame} - Returns the current game object containing
+	 *         Game board ,game status , players etc.
+	 */
+	@ApiOperation(value = &quot;/reset&quot;, notes = &quot;This api is used to reset a game.&quot;, response = KalahGame.class)
+	@RequestMapping(value = &quot;/reset&quot;, method = RequestMethod.POST)
+	public ResponseEntity&lt;KalahGame&gt; resetGame(@RequestBody KalahGame kalahGame) {
+<span class="nc" id="L84">		return ResponseEntity.status(HttpStatus.OK).body(gameService.resetGame(kalahGame));</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

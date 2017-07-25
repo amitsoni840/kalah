@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.backbase.game.kalah.rules.test.KalahStonesCaptureRuleTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in com.backbase.game.kalah.rules.test.KalahStonesCaptureRuleTest

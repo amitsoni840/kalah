@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InvalidMoveException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KalahGame</a> &gt; <a href="index.source.html" class="el_package">com.aks.game.kalah</a> &gt; <span class="el_source">InvalidMoveException.java</span></div><h1>InvalidMoveException.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.aks.game.kalah;
+
+/**
+ * Exception thrown when user tries to perform an illegal move.
+ * 
+ * @author Amit Soni
+ *
+ */
+public class InvalidMoveException extends RuntimeException {
+
+	/**
+	 * Serial Version ID.
+	 */
+	private static final long serialVersionUID = -5568996038250490803L;
+	/**
+	 * Error Code.
+	 */
+	private int errorCode;
+	/**
+	 * Error Message.
+	 */
+	private String errorMessage;
+
+	/**
+	 * Constructor to create and object from errorCode and errorMessage
+	 * properties.
+	 * 
+	 * @param errorCode
+	 *            - Integre Error Code.
+	 * @param errorMessage
+	 *            - String Error Message.
+	 */
+	public InvalidMoveException(int errorCode, String errorMessage) {
+<span class="fc" id="L37">		super();</span>
+<span class="fc" id="L38">		this.errorCode = errorCode;</span>
+<span class="fc" id="L39">		this.errorMessage = errorMessage;</span>
+<span class="fc" id="L40">	}</span>
+
+	/**
+	 * @return the errorCode
+	 */
+	public int getErrorCode() {
+<span class="nc" id="L46">		return errorCode;</span>
+	}
+
+	/**
+	 * @param errorCode
+	 *            the errorCode to set
+	 */
+	public void setErrorCode(int errorCode) {
+<span class="nc" id="L54">		this.errorCode = errorCode;</span>
+<span class="nc" id="L55">	}</span>
+
+	/**
+	 * @return the errorMessage
+	 */
+	public String getErrorMessage() {
+<span class="nc" id="L61">		return errorMessage;</span>
+	}
+
+	/**
+	 * @param errorMessage
+	 *            the errorMessage to set
+	 */
+	public void setErrorMessage(String errorMessage) {
+<span class="nc" id="L69">		this.errorMessage = errorMessage;</span>
+<span class="nc" id="L70">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
